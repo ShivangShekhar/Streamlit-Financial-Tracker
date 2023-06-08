@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Function to display the raw data table
 def show_raw_data(data):
@@ -9,10 +9,8 @@ def show_raw_data(data):
 # Function to display the pie chart
 def show_pie_chart(data):
     category_amounts = data.groupby('Category')['Amount'].sum()
-    fig, ax = plt.subplots()
-    ax.pie(category_amounts, labels=category_amounts.index, autopct='%1.1f%%')
-    ax.set_aspect('equal')
-    st.pyplot(fig)
+    fig = px.pie(category_amounts, values=category_amounts.values, names=category_amounts.index, labels=category_amounts.index)
+    st.plotly_chart(fig)
 
 # Main function
 def main():
